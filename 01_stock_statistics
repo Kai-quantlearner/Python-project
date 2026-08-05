@@ -3,8 +3,8 @@ import yfinance as yf
 
 tte_data = yf.download('TTE.PA', period='1y')
 close_tte = tte_data[('Close', 'TTE.PA')]
-last_close_price_1 = close_tte.iloc[-1]
-first_close_price_1 = close_tte.iloc[0]
+last_close_price_float = close_tte.iloc[-1]
+first_close_price_float = close_tte.iloc[0]
 last_close_price = tte_data['Close'].iloc[-1]
 first_close_price = tte_data['Close'].iloc[0]
 
@@ -12,5 +12,7 @@ head = tte_data.head()
 tail = tte_data.tail()
 describe = tte_data.describe()
 info = tte_data.info()
-performance = np.divide(np.multiply(first_close_price_1, 100), last_close_price_1)
-print(last_close_price, first_close_price, f"performance: {float(performance):.2f}%")
+performance = np.multiply(np.divide(np.subtract(last_close_price_float, first_close_price_float), first_close_price_float), 100)
+print(f"Premier prix : {first_close_price_float:.2f} €")
+print(f"Dernier prix : {last_close_price_float:.2f} €")
+print(f"Performance : {performance:.2f}%")
