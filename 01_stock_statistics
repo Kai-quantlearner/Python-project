@@ -16,6 +16,20 @@ volume_float = volume.iloc[0]
 daily_returns = close_tte.pct_change().dropna()
 mean_daily_return = daily_returns.mean()
 daily_volatility = np.std(daily_returns, ddof=1)
+annualized_volatility = np.multiply(daily_volatility, np.sqrt(252))
+annualized_return = np.subtract(
+    np.power(
+        np.prod(
+            np.add(daily_returns, 1)
+        ),
+        np.divide(252, len(daily_returns))
+    ),
+    1
+)
+sharpe_ratio = np.divide(
+    np.subtract(annualized_return, 0),
+    annualized_volatility
+)
 
 head = tte_data.head()
 tail = tte_data.tail()
@@ -34,3 +48,6 @@ print("Statistiques de l'action TotalEnergies (TTE.PA) sur la dernière année :
              f"Rendements quotidiens :\n{daily_returns}")
 print(f"Rendement quotidien moyen : {mean_daily_return*100:.4f}%")
 print(f"Volatilité quotidienne : {daily_volatility*100:.4f}%")
+print(f"Volatilité annualisée : {annualized_volatility*100:.4f}%")
+print(f"Rendement annualisé : {annualized_return*100:.4f}%")
+print(f"Ratio de Sharpe : {sharpe_ratio:.4f}")
