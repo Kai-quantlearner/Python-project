@@ -1,3 +1,4 @@
+import numpy as np
 import yfinance as yf
 
 tte_data = yf.download('TTE.PA', period='1y')
