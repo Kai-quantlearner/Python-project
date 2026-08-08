@@ -1,9 +1,4 @@
-from statistics import (
-    first_close_price,
-    last_close_price,
-    performance,
-    annualized_return
-)
+from statistic import  first_close_price, last_close_price, performance, annualized_return
 
 from risk import (
     annualized_volatility,
