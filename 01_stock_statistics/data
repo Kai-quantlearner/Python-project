@@ -30,13 +30,20 @@ sharpe_ratio = np.divide(
     np.subtract(annualized_return, 0),
     annualized_volatility
 )
-
+max_drawdown = np.min(np.subtract(np.divide(close_tte, close_tte.cummax()), 1))
+positive_days = np.sum(daily_returns > 0)
+negative_days = np.sum(daily_returns < 0)
+Win_rate = np.divide(positive_days, np.add(positive_days, negative_days))
 head = tte_data.head()
 tail = tte_data.tail()
 describe = tte_data.describe()
 info = tte_data.info()
 variation = np.subtract(last_close_price_float, first_close_price_float)
 performance = np.multiply(np.divide(np.subtract(last_close_price_float, first_close_price_float), first_close_price_float), 100)
+best_day = np.max(daily_returns)
+worst_day = np.min(daily_returns)
+
+
 print("Statistiques de l'action TotalEnergies (TTE.PA) sur la dernière année :",
        f"Premier prix : {first_close_price_float:.2f} €",
         f"Dernier prix : {last_close_price_float:.2f} €",
@@ -51,3 +58,9 @@ print(f"Volatilité quotidienne : {daily_volatility*100:.4f}%")
 print(f"Volatilité annualisée : {annualized_volatility*100:.4f}%")
 print(f"Rendement annualisé : {annualized_return*100:.4f}%")
 print(f"Ratio de Sharpe : {sharpe_ratio:.4f}")
+print(f"Drawdown maximal : {max_drawdown*100:.4f}%")
+print(f"Nombre de jours positifs : {positive_days}")
+print(f"Nombre de jours négatifs : {negative_days}")
+print(f"Ratio de gain/perte : {Win_rate:.4f}")
+print(f"Meilleur jour : {best_day*100:.4f}%")
+print(f"Pire jour : {worst_day*100:.4f}%")
