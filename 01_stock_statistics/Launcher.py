@@ -1,4 +1,4 @@
-from stat import annualized_return, daily_returns, close_tte, first_close_price_float, last_close_price_float, performance
+from market_stats import annualized_return, daily_returns, close_tte, first_close_price_float, last_close_price_float, performance
 from risk import annualized_volatility, sharpe_ratio, max_drawdown,win_rate, best_day, worst_day, positive_days, negative_days
 
 print(f"Premier prix : {first_close_price_float:.2f} €")

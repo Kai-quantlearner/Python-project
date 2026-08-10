@@ -1,16 +1,13 @@
 import numpy as np
 from data import close_tte, daily_returns
-from stat import annualized_return
+from market_stats import annualized_return
 
 daily_volatility = np.std(daily_returns, ddof=1)
 
 annualized_volatility = np.multiply(daily_volatility, np.sqrt(252))
 
 sharpe_ratio = np.divide(
-    np.subtract(
-        annualized_return,
-        0
-    ),
+    np.subtract(annualized_return, 0),
     annualized_volatility
 )
 

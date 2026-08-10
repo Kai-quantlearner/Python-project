@@ -10,8 +10,7 @@ performance = np.multiply(np.divide(variation, first_close_price_float), 100)
 
 mean_daily_return = daily_returns.mean()
 daily_volatility = np.std(daily_returns, ddof=1)
-def annualized_return():
-    return np.subtract(
+annualized_return = np.subtract(
         np.power(
             np.prod(
                 np.add(daily_returns, 1)
